@@ -1,0 +1,2 @@
+class Moviegoer < ApplicationRecord
+end

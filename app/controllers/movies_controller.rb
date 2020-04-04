@@ -1,4 +1,8 @@
 class MoviesController < ApplicationController
+
+
+
+
     def index
         @movies = Movie.all
 	end
@@ -19,16 +23,22 @@ class MoviesController < ApplicationController
     
 
     def create
-        @movie = Movie.create!(params[:movie].permit(:title,:rating,:release_date))
-        redirect_to movies_path 
+        @movie = Movie.new(params[:movie].permit!) 
+        if @movie.save
+            flash[:notice] = "Movie #{@movie.title} was added"
+            redirect_to movies_path
+        else
+            flash[:notice] = @movie.errors.full_messages
+            redirect_to movies_path
+        end
     end
+
 
 	
     def edit
         id = params[:id]
         @movie = Movie.find(id)
 	end
-    
     
 
 
@@ -38,11 +48,24 @@ class MoviesController < ApplicationController
         @movie.update_attributes!(params[:movie].permit(:title, :rating, :description, :release_date))
 		redirect_to movie_path(@movie)
 	end
-	
+
+    
 	def destroy
 		id = params[:id]
 		@movie = Movie.find(id)
 		@movie.destroy
 		redirect_to movies_path
-	end
+    end
+    
+    def create2
+        @movie = Movie.new(params[:movie].permit!)
+        if @movie.save
+            flash[:notice] = "Movie #{@movie.title} was added"
+            redirect_to movies_path 
+        else 
+            flash[:notice] = @movie.errors.full_messages
+            redirect_to movies_path
+        end
+    end
+
 end

@@ -1,0 +1,11 @@
+%h2 Rotten Potatoes Login 
+ 
+= form_tag callback_path(), :method => :get do
+
+    = label :user, :name, 'User Name'
+    = text_field :user, :name
+
+    = label :user, :password, 'Password'
+    = password_field :user, :password
+    
+    = submit_tag 'Login' 
