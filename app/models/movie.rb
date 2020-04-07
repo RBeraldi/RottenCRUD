@@ -1,7 +1,8 @@
 class Movie < ApplicationRecord
-    
-
-    def release_date_1930_or_later
+  
+   has_many :reviews    
+   
+   def release_date_1930_or_later
        if release_date < Date.parse('1 Jan 1930')
         errors.add(:release_date, 'Date must be at least 1930')
        end

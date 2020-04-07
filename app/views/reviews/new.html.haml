@@ -1,0 +1,13 @@
+%h2 Create a Review
+
+= form_tag movie_reviews_path, :method => :post do
+
+    = label :review, :potatoes, 'Vote'
+    = select :review, :potatoes, [1,2,3,4,5]
+ 
+    = label :review, :comments, 'Comment'
+    = text_field :review, :comments
+
+    = submit_tag 'Add Review' 
+  
+  
